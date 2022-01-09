@@ -14,11 +14,13 @@ html(lang="en")
       hr
       
       section#commands
+      div
+        input(type='search')
       .row.px-4
         .col-sm-3
           each category in categories
             +category(category)
         .col-sm-9
-          ul.list-group
-            li.list-group-item
-              p nine
+          each command in commands
+            ul.list-group
+              li.list-group-item #{command.name}
