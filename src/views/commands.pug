@@ -26,5 +26,4 @@ html(lang="en")
             +category(category)
         .col-sm-9
           each command in commands
-            ul.list-group
-              li.list-group-item #{command.name}
+            +command(command)
