@@ -5,3 +5,7 @@
 #search+button {
   height: 64px;
 }
+
+li {
+  cursor: pointer;
+}
