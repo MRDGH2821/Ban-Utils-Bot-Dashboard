@@ -5,7 +5,7 @@ doctype
 html(lang="en")
   head
     include includes/header.pug
-
+    link(rel='stylesheet', href='/css/commands.css')
   body
     include includes/navbar.pug
     .container-fluid.p-5.text-center.bg-transparent
@@ -14,8 +14,11 @@ html(lang="en")
       hr
       
       section#commands
-      div
-        input(type='search')
+        .d-flex.justify-content-center
+          #search.form-group.p-3
+            input.form-control(type='search')
+          button.btn.btn-sm
+            i.fas.fa-search
       .row.px-4
         .col-sm-3
           each category in categories
