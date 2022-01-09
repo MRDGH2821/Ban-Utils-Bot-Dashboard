@@ -1,0 +1,24 @@
+include includes/mixins
+
+doctype  
+
+html(lang="en")
+  head
+    include includes/header.pug
+
+  body
+    include includes/navbar.pug
+    .container-fluid.p-5.text-center.bg-transparent
+      h1.display-3 Commands & Configuration
+      p.lead View Commands & Configuration for Ban Utils
+      hr
+      
+      section#commands
+      .row.px-4
+        .col-sm-3
+          each category in categories
+            +category(category)
+        .col-sm-9
+          ul.list-group
+            li.list-group-item
+              p nine
