@@ -27,14 +27,16 @@ app.set('view engine', 'pug');
 
 app.use(express.static(`${__dirname}/assets`));
 app.locals.basedir = `${__dirname}/assets`;
-
-app.get('/', (req, res) =>
+console.log(__dirname);
+app.get('/', (req, res) => {
+  console.log(req.url);
   res.render('index', {
     subtitle: 'Home',
-  }),
-);
+  });
+});
 
-app.get('/commands', (req, res) =>
+app.get('/commands', (req, res) => {
+  console.log(req.url);
   res.render('commands', {
     subtitle: 'Commands',
     categories: [
@@ -46,8 +48,8 @@ app.get('/commands', (req, res) =>
       { name: 'transfer bans', icon: 'fas fa-exchange-alt' },
     ],
     commands,
-  }),
-);
+  });
+});
 
 app.listen(port, () =>
   console.log(`Server is Live at http://${domain}:${port}`),
