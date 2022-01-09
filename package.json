@@ -31,9 +31,14 @@
   "dependencies": {
     "bootstrap": "^5.1.3",
     "express": "^4.17.2",
+    "jquery": "^3.6.0",
     "pug": "^3.0.2"
   },
   "devDependencies": {
+    "@types/bootstrap": "^5.1.8",
+    "@types/express": "^4.17.13",
+    "@types/jquery": "^3.5.11",
+    "@types/pug": "^2.0.6",
     "eslint": "^8.6.0",
     "eslint-config-mrdgh2821": "^1.1.0",
     "prettier-config-mrdgh2821": "^1.0.0"
@@ -50,6 +55,11 @@
     },
     "parserOptions": {
       "ecmaVersion": 2021
+    },
+    "__rules__": {
+      "no-undef": [
+        "off"
+      ]
     }
   }
 }
