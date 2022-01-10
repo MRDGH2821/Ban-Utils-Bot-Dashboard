@@ -28,6 +28,7 @@ app.set('view engine', 'pug');
 app.use(express.static(`${__dirname}/assets`));
 app.locals.basedir = `${__dirname}/assets`;
 console.log(__dirname);
+
 app.get('/', (req, res) => {
   console.log(req.url);
   res.render('index', {
