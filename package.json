@@ -2,6 +2,7 @@
   "name": "website-ban-utils-discord",
   "version": "1.0.0",
   "description": "Website soruce code for the Ban Utils discord bot",
+  "private": "true",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
