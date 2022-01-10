@@ -74,3 +74,7 @@ typings/
 
 # FuseBox cache
 .fusebox/
+firebaseConfig.js
+
+.github/
+Ban Utils Dashboard.bsdesign
