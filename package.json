@@ -1,5 +1,5 @@
 {
-  "name": "website-ban-utils-discord",
+  "name": "Website-Ban-Utils-Discord",
   "version": "1.0.0",
   "description": "Website soruce code for the Ban Utils discord bot",
   "private": true,
@@ -61,11 +61,6 @@
     },
     "parserOptions": {
       "ecmaVersion": 2021
-    },
-    "__rules__": {
-      "no-undef": [
-        "off"
-      ]
     }
   },
   "browserslist": {
