@@ -1,2 +1,7 @@
 # Website Ban Utils Discord
- Website soruce code for the Ban Utils discord bot
+
+Website source code for the Ban Utils discord bot.
+
+DEPRICIATED!!
+
+DO NOT USE THIS REPO!
