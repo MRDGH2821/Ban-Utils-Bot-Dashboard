@@ -1,0 +1,42 @@
+.ban-copy-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.ban-copy-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2C2F33;
+}
+
+.ban-copy-button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #7289DA;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.ban-copy-button:hover {
+    background-color: #5865F2;
+}
+
+.ban-copy-button:disabled {
+    background-color: #B9BBBE;
+    cursor: not-allowed;
+}
+
+.ban-copy-success {
+    margin-top: 10px;
+    color: #43B581;
+}
+
+.ban-copy-error {
+    margin-top: 10px;
+    color: #F04747;
+}
