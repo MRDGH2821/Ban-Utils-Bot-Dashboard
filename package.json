@@ -1,8 +1,8 @@
 {
-  "name": "Website-Ban-Utils-Discord",
+  "name": "starter-react-app",
   "version": "1.0.0",
-  "description": "Website soruce code for the Ban Utils discord bot",
-  "private": true,
+  "description": "A starter react app based on the latest standards with Typescript.",
+  "main": "src/index.tsx",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -10,74 +10,26 @@
     "eject": "react-scripts eject"
   },
   "keywords": [
-    "website",
-    "discord",
-    "ban",
-    "utilities",
-    "ban-utils"
+    "react",
+    "typescript",
+    "firebase",
+    "authentication"
   ],
-  "author": {
-    "name": "MRDGH2821",
-    "url": "https://github.com/MRDGH2821/"
-  },
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MRDGH2821/Website-Ban-Utils-Discord.git"
-  },
-  "bugs": {
-    "url": "https://github.com/MRDGH2821/Website-Ban-Utils-Discord/issues"
-  },
-  "homepage": "https://github.com/MRDGH2821/Website-Ban-Utils-Discord#readme",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router": "^6.2.1",
-    "react-router-dom": "^6.2.1",
-    "react-scripts": "5.0.0",
-    "styled-components": "^5.3.3",
-    "web-vitals": "^2.1.3"
+    "react-router-dom": "^5.2.0",
+    "styled-components": "^5.3.1",
+    "firebase": "^8.10.0"
   },
   "devDependencies": {
-    "commitizen": "^4.2.4",
-    "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.6.0",
-    "eslint-config-mrdgh2821": "^1.1.0",
-    "prettier-config-mrdgh2821": "^1.0.0"
-  },
-  "prettier": "prettier-config-mrdgh2821",
-  "eslintConfig": {
-    "extends": [
-      "eslint:recommended",
-      "react-app",
-      "react-app/jest"
-    ],
-    "env": {
-      "es6": true,
-      "node": true
-    },
-    "parserOptions": {
-      "ecmaVersion": 2021
-    }
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/react-router-dom": "^5.1.7",
+    "@types/styled-components": "^5.1.9",
+    "typescript": "^4.3.5",
+    "react-scripts": "4.0.3"
   }
 }
