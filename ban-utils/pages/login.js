@@ -1,26 +1,32 @@
+```javascript
 import React from 'react';
 import { useRouter } from 'next/router';
-import { login } from '../utils/discordOAuth';
+import { getDiscordRedirectURL } from '../utils/discordOAuth';
+import LoginButton from '../components/LoginButton';
 
-export default function LoginPage() {
+const LoginPage = () => {
   const router = useRouter();
 
   const handleLogin = async () => {
-    try {
-      await login();
-      router.push('/dashboard');
-    } catch (error) {
-      console.error('Failed to login', error);
-    }
+    const redirectURL = getDiscordRedirectURL();
+    window.location.href = redirectURL;
   };
+
+  React.useEffect(() => {
+    const code = router.query.code;
+
+    if (code) {
+      // TODO: Handle the OAuth code to get the access token and log in the user
+    }
+  }, [router.query.code]);
 
   return (
     <div>
-      <h1>Welcome to Ban Utils</h1>
-      <p>Please login with your Discord account to continue.</p>
-      <button id="loginButton" onClick={handleLogin}>
-        Login with Discord
-      </button>
+      <h1>Login to Ban Utils</h1>
+      <LoginButton onClick={handleLogin} />
     </div>
   );
-}
+};
+
+export default LoginPage;
+```

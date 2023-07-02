@@ -1,11 +1,10 @@
+```javascript
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import { getDiscordUserServers } from '../utils/discordAPI';
 import ServerList from '../components/ServerList';
 import ServerSelect from '../components/ServerSelect';
 import BanCopy from '../components/BanCopy';
-import { fetchServers } from '../utils/discordAPI';
 
 const Dashboard = () => {
   const router = useRouter();
@@ -14,39 +13,42 @@ const Dashboard = () => {
   const [targetServer, setTargetServer] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await fetchServers();
-      setServers(result);
+    const fetchServers = async () => {
+      const servers = await getDiscordUserServers();
+      setServers(servers);
     };
 
-    fetchData();
+    fetchServers();
   }, []);
 
   const handleServerSelect = (server) => {
     setSelectedServer(server);
   };
 
-  const handleTargetSelect = (server) => {
+  const handleTargetServerSelect = (server) => {
     setTargetServer(server);
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('discordToken');
     router.push('/login');
   };
 
   return (
     <div>
-      <Header onLogout={handleLogout} />
+      <button onClick={handleLogout}>Logout</button>
       <ServerList servers={servers} onServerSelect={handleServerSelect} />
       {selectedServer && (
-        <ServerSelect servers={servers} onServerSelect={handleTargetSelect} />
+        <ServerSelect
+          servers={servers}
+          selectedServer={selectedServer}
+          onTargetServerSelect={handleTargetServerSelect}
+        />
       )}
-      {selectedServer && targetServer && (
-        <BanCopy sourceServer={selectedServer} targetServer={targetServer} />
-      )}
-      <Footer />
+      {targetServer && <BanCopy sourceServer={selectedServer} targetServer={targetServer} />}
     </div>
   );
 };
 
 export default Dashboard;
+```

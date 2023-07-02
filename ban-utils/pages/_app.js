@@ -1,16 +1,14 @@
-import React from 'react';
-import { Provider } from 'react-redux';
-import { useStore } from '../store';
-import '../styles/globals.css';
+```javascript
+import '../styles/globals.css'
+import { Provider } from 'next-auth/client'
 
 function MyApp({ Component, pageProps }) {
-  const store = useStore(pageProps.initialReduxState);
-
   return (
-    <Provider store={store}>
+    <Provider session={pageProps.session}>
       <Component {...pageProps} />
     </Provider>
-  );
+  )
 }
 
-export default MyApp;
+export default MyApp
+```

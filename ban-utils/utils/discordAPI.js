@@ -1,34 +1,43 @@
-const axios = require('axios');
+```javascript
+import axios from 'axios';
 
-const discordAPIConfig = {
-  baseURL: 'https://discord.com/api',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-};
+const BASE_URL = 'https://discord.com/api';
 
-const discordAPI = axios.create(discordAPIConfig);
-
-const fetchUser = async (accessToken) => {
-  discordAPI.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-  const response = await discordAPI.get('/users/@me');
+export const getUserServers = async (accessToken) => {
+  const response = await axios.get(`${BASE_URL}/users/@me/guilds`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   return response.data;
 };
 
-const fetchServers = async (accessToken) => {
-  discordAPI.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-  const response = await discordAPI.get('/users/@me/guilds');
+export const getBannedUsers = async (accessToken, serverId) => {
+  const response = await axios.get(`${BASE_URL}/guilds/${serverId}/bans`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
   return response.data;
 };
 
-const fetchBans = async (accessToken, serverId) => {
-  discordAPI.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
-  const response = await discordAPI.get(`/guilds/${serverId}/bans`);
-  return response.data;
+export const banUser = async (accessToken, serverId, userId, reason = '') => {
+  await axios.put(
+    `${BASE_URL}/guilds/${serverId}/bans/${userId}?delete-message-days=0&reason=${encodeURIComponent(reason)}`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
 };
 
-module.exports = {
-  fetchUser,
-  fetchServers,
-  fetchBans,
+export const unbanUser = async (accessToken, serverId, userId) => {
+  await axios.delete(`${BASE_URL}/guilds/${serverId}/bans/${userId}`, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
 };
+```

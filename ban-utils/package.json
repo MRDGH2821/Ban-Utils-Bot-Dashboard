@@ -2,19 +2,23 @@
   "name": "ban-utils",
   "version": "1.0.0",
   "description": "A dashboard for the discord bot 'Ban Utils'",
-  "main": "next.config.js",
+  "main": "index.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
+  "keywords": ["discord", "ban", "utils", "dashboard"],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "next": "^10.0.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "firebase": "^8.2.1",
-    "isomorphic-unfetch": "^3.1.0",
-    "next-auth": "^3.1.0",
-    "swr": "^0.3.9"
+    "next": "11.1.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "firebase": "8.10.0",
+    "axios": "0.21.1",
+    "dotenv": "10.0.0",
+    "next-auth": "3.27.3",
+    "swr": "0.5.6"
   }
 }

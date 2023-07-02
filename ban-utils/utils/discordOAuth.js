@@ -1,44 +1,51 @@
-const axios = require('axios');
-const qs = require('querystring');
+```javascript
+import { stringify } from 'querystring';
+import fetch from 'node-fetch';
 
-const discordOAuthConfig = {
-  clientId: process.env.DISCORD_CLIENT_ID,
-  clientSecret: process.env.DISCORD_CLIENT_SECRET,
-  redirectUri: process.env.DISCORD_REDIRECT_URI,
-  scope: 'identify guilds',
-};
+const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
+const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
 
-async function exchangeCodeForAccessToken(code) {
-  const data = {
-    client_id: discordOAuthConfig.clientId,
-    client_secret: discordOAuthConfig.clientSecret,
+export async function getDiscordAccessToken(code) {
+  const params = {
+    client_id: CLIENT_ID,
+    client_secret: CLIENT_SECRET,
     grant_type: 'authorization_code',
-    redirect_uri: discordOAuthConfig.redirectUri,
     code,
-    scope: discordOAuthConfig.scope,
+    redirect_uri: REDIRECT_URI,
+    scope: 'identify guilds',
   };
 
-  const response = await axios.post('https://discord.com/api/oauth2/token', qs.stringify(data), {
+  const res = await fetch('https://discord.com/api/oauth2/token', {
+    method: 'POST',
+    body: stringify(params),
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
     },
   });
 
-  return response.data.access_token;
+  const json = await res.json();
+
+  if (json.error) {
+    throw new Error(json.error_description);
+  }
+
+  return json.access_token;
 }
 
-async function getUserInfo(accessToken) {
-  const response = await axios.get('https://discord.com/api/users/@me', {
+export async function getDiscordUser(accessToken) {
+  const res = await fetch('https://discord.com/api/users/@me', {
     headers: {
-      Authorization: `Bearer ${accessToken}`,
+      authorization: `Bearer ${accessToken}`,
     },
   });
 
-  return response.data;
-}
+  const json = await res.json();
 
-module.exports = {
-  discordOAuthConfig,
-  exchangeCodeForAccessToken,
-  getUserInfo,
-};
+  if (json.code) {
+    throw new Error(json.message);
+  }
+
+  return json;
+}
+```

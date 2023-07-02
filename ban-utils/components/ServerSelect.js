@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
+```javascript
+import React, { useState, useEffect } from 'react';
+import { getDiscordServers } from '../utils/discordAPI';
 
-const ServerSelect = ({ servers, onSelect }) => {
-  const [selectedServer, setSelectedServer] = useState(null);
+const ServerSelect = ({ setServerId }) => {
+  const [servers, setServers] = useState([]);
 
-  const handleSelect = (server) => {
-    setSelectedServer(server);
-    onSelect(server);
+  useEffect(() => {
+    getDiscordServers()
+      .then(servers => setServers(servers))
+      .catch(err => console.error(err));
+  }, []);
+
+  const handleServerSelect = (event) => {
+    setServerId(event.target.value);
   };
 
   return (
-    <div id="serverSelect">
-      <h2>Select a Server</h2>
-      <select onChange={(e) => handleSelect(e.target.value)}>
-        <option value="">--Select a server--</option>
-        {servers.map((server) => (
-          <option key={server.id} value={server.id}>
-            {server.name}
-          </option>
+    <div>
+      <label htmlFor="serverSelect">Select a server:</label>
+      <select id="serverSelect" onChange={handleServerSelect}>
+        <option value="">--Please choose a server--</option>
+        {servers.map(server => (
+          <option key={server.id} value={server.id}>{server.name}</option>
         ))}
       </select>
-      {selectedServer && <p>Selected Server: {selectedServer}</p>}
     </div>
   );
 };
 
 export default ServerSelect;
+```

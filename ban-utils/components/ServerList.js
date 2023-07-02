@@ -1,14 +1,14 @@
+```javascript
 import React from 'react';
 
-const ServerList = ({ servers }) => {
+const ServerList = ({ servers, onSelect }) => {
   return (
-    <div id="serverList">
-      <h2>Your Servers</h2>
+    <div>
+      <h2>Select a Server</h2>
       <ul>
-        {servers.map((server) => (
-          <li key={server.id}>
-            <img src={server.icon} alt={server.name} />
-            <span>{server.name}</span>
+        {servers.map((server, index) => (
+          <li key={index} onClick={() => onSelect(server)}>
+            {server.name}
           </li>
         ))}
       </ul>
@@ -17,3 +17,4 @@ const ServerList = ({ servers }) => {
 };
 
 export default ServerList;
+```

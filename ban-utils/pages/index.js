@@ -1,21 +1,27 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../utils/firebase';
+import LoginButton from '../components/LoginButton';
 
-const Index = () => {
+const HomePage = () => {
   const router = useRouter();
-  const [user] = useAuthState(auth);
+
+  const checkLogin = async () => {
+    const token = localStorage.getItem('discord_token');
+    if (token) {
+      router.push('/dashboard');
+    }
+  };
 
   React.useEffect(() => {
-    if (user) {
-      router.push('/dashboard');
-    } else {
-      router.push('/login');
-    }
-  }, [user]);
+    checkLogin();
+  }, []);
 
-  return null;
+  return (
+    <div>
+      <h1>Welcome to Ban Utils</h1>
+      <LoginButton />
+    </div>
+  );
 };
 
-export default Index;
+export default HomePage;
