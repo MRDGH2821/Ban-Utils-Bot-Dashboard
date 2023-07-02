@@ -1,51 +1,39 @@
 ```javascript
-import { stringify } from 'querystring';
-import fetch from 'node-fetch';
+import axios from 'axios';
 
-const CLIENT_ID = process.env.DISCORD_CLIENT_ID;
-const CLIENT_SECRET = process.env.DISCORD_CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI;
+const discordOAuth = async (code) => {
+  try {
+    const { data } = await axios.post('https://discord.com/api/oauth2/token', new URLSearchParams({
+      client_id: process.env.DISCORD_CLIENT_ID,
+      client_secret: process.env.DISCORD_CLIENT_SECRET,
+      code,
+      grant_type: 'authorization_code',
+      redirect_uri: process.env.REDIRECT_URI,
+      scope: 'identify guilds',
+    }), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
 
-export async function getDiscordAccessToken(code) {
-  const params = {
-    client_id: CLIENT_ID,
-    client_secret: CLIENT_SECRET,
-    grant_type: 'authorization_code',
-    code,
-    redirect_uri: REDIRECT_URI,
-    scope: 'identify guilds',
-  };
+    const userResult = await axios.get('https://discord.com/api/users/@me', {
+      headers: {
+        authorization: `${data.token_type} ${data.access_token}`,
+      },
+    });
 
-  const res = await fetch('https://discord.com/api/oauth2/token', {
-    method: 'POST',
-    body: stringify(params),
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  });
+    const guildsResult = await axios.get('https://discord.com/api/users/@me/guilds', {
+      headers: {
+        authorization: `${data.token_type} ${data.access_token}`,
+      },
+    });
 
-  const json = await res.json();
-
-  if (json.error) {
-    throw new Error(json.error_description);
+    return { user: userResult.data, guilds: guildsResult.data };
+  } catch (error) {
+    console.error(error);
+    return null;
   }
+};
 
-  return json.access_token;
-}
-
-export async function getDiscordUser(accessToken) {
-  const res = await fetch('https://discord.com/api/users/@me', {
-    headers: {
-      authorization: `Bearer ${accessToken}`,
-    },
-  });
-
-  const json = await res.json();
-
-  if (json.code) {
-    throw new Error(json.message);
-  }
-
-  return json;
-}
+export default discordOAuth;
 ```

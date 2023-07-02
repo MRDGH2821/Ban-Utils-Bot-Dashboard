@@ -1,27 +1,20 @@
+```javascript
 import React from 'react';
-import { useRouter } from 'next/router';
-import LoginButton from '../components/LoginButton';
+import Login from '../components/Login';
+import ServerList from '../components/ServerList';
+import { useAuth } from '../utils/discordOAuth';
 
-const HomePage = () => {
-  const router = useRouter();
+export default function Home() {
+  const { user, loading } = useAuth();
 
-  const checkLogin = async () => {
-    const token = localStorage.getItem('discord_token');
-    if (token) {
-      router.push('/dashboard');
-    }
-  };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-  React.useEffect(() => {
-    checkLogin();
-  }, []);
+  if (!user) {
+    return <Login />;
+  }
 
-  return (
-    <div>
-      <h1>Welcome to Ban Utils</h1>
-      <LoginButton />
-    </div>
-  );
-};
-
-export default HomePage;
+  return <ServerList />;
+}
+```

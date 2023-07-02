@@ -1,17 +1,17 @@
 ```javascript
 import React, { useState } from 'react';
-import { copyBans } from '../utils/discordAPI';
+import { copyBans } from '../utils/copyBans';
 
-const BanCopy = ({ sourceServer, targetServer, userToken }) => {
+const CopyBans = ({ sourceServer, targetServer }) => {
   const [copyStatus, setCopyStatus] = useState('');
 
-  const handleBanCopy = async () => {
-    setCopyStatus('Copying bans...');
+  const handleCopyBans = async () => {
     try {
-      await copyBans(sourceServer, targetServer, userToken);
+      setCopyStatus('Copying bans...');
+      await copyBans(sourceServer, targetServer);
       setCopyStatus('Bans copied successfully!');
     } catch (error) {
-      setCopyStatus(`Error: ${error.message}`);
+      setCopyStatus(`Error copying bans: ${error.message}`);
     }
   };
 
@@ -20,11 +20,11 @@ const BanCopy = ({ sourceServer, targetServer, userToken }) => {
       <h2>Copy Bans</h2>
       <p>Source Server: {sourceServer}</p>
       <p>Target Server: {targetServer}</p>
-      <button onClick={handleBanCopy}>Copy Bans</button>
+      <button onClick={handleCopyBans}>Copy Bans</button>
       <p>{copyStatus}</p>
     </div>
   );
 };
 
-export default BanCopy;
+export default CopyBans;
 ```

@@ -1,14 +1,27 @@
 ```javascript
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { getUserServers } from '../utils/getUserServers';
 
-const ServerList = ({ servers, onSelect }) => {
+const ServerList = ({ token }) => {
+  const [servers, setServers] = useState([]);
+
+  useEffect(() => {
+    const fetchServers = async () => {
+      const serverList = await getUserServers(token);
+      setServers(serverList);
+    };
+
+    fetchServers();
+  }, [token]);
+
   return (
     <div>
-      <h2>Select a Server</h2>
+      <h2>Your Discord Servers</h2>
       <ul>
-        {servers.map((server, index) => (
-          <li key={index} onClick={() => onSelect(server)}>
-            {server.name}
+        {servers.map((server) => (
+          <li key={server.id}>
+            <img src={server.icon} alt={server.name} />
+            <span>{server.name}</span>
           </li>
         ))}
       </ul>

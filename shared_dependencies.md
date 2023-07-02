@@ -1,29 +1,30 @@
 Shared Dependencies:
 
-1. React.js: Used in all the front-end files for creating the user interface.
+1. React.js: Used in all the components and pages for creating the user interface.
 
-2. Next.js: Used in all the back-end files for server-side rendering and routing.
+2. Next.js: Used for server-side rendering and routing in all the pages.
 
-3. Google Firebase Cloud Firestore: Used in "firebase.js" for database operations and shared across all files where database operations are required.
+3. Google Firebase Cloud Firestore: Used in firebase.js for database operations.
 
-4. Discord OAuth: Used in "discordOAuth.js" and shared across "login.js" and "dashboard.js" for user authentication.
+4. Discord OAuth: Used in discordOAuth.js and Login.js for user authentication.
 
-5. Discord API: Used in "discordAPI.js" and shared across "dashboard.js", "ServerList.js", "ServerSelect.js", and "BanCopy.js" for fetching and manipulating discord server data.
+5. Exported Variables: 
+   - In firebase.js, the initialized firebase app is exported.
+   - In discordOAuth.js, the discord authentication function is exported.
+   - In getUserServers.js, getServerBans.js, and copyBans.js, the respective utility functions are exported.
 
-6. CSS: "globals.css" is shared across all the pages for styling.
+6. Data Schemas: User data schema is used in discordOAuth.js and getUserServers.js. Server data schema is used in getServerBans.js and copyBans.js.
 
-7. Components: "LoginButton.js", "ServerList.js", "ServerSelect.js", and "BanCopy.js" are React components used in various pages.
+7. DOM Element IDs: 
+   - In Login.js, the login button has an ID.
+   - In ServerList.js, each server item in the list has a unique ID.
+   - In BanList.js, each ban item in the list has a unique ID.
+   - In CopyBans.js, the copy button has an ID.
 
-8. DOM Elements: IDs of DOM elements used in JavaScript functions are shared across files. For example, elements in "LoginButton.js" might be used in "login.js".
+8. Message Names: Error and success messages are used in Login.js, ServerList.js, BanList.js, and CopyBans.js.
 
-9. Functions: Functions defined in utility files like "discordOAuth.js", "firebase.js", and "discordAPI.js" are shared across various other files.
-
-10. Assets: "favicon.ico", "logo192.png", "logo512.png", and "manifest.json" in the public directory are shared across all pages.
-
-11. Package.json: Contains project metadata and dependencies, shared across all files.
-
-12. next.config.js: Contains configuration for the Next.js framework, shared across all files.
-
-13. _app.js: Custom App component in Next.js, shared across all pages.
-
-14. index.js: The main entry point of the application, shared across all files.
+9. Function Names: 
+   - In Login.js, there's a function for handling login.
+   - In ServerList.js, there's a function for fetching and displaying the server list.
+   - In BanList.js, there's a function for fetching and displaying the ban list.
+   - In CopyBans.js, there's a function for copying bans from one server to another.
